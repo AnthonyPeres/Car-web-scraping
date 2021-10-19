@@ -24,8 +24,9 @@ def clear_string(string):
     first_traitement = emoji_pattern.sub(r'', string)
     second_traitement = first_traitement.replace('\n', ' '.strip())
     third_traitement = " ".join(second_traitement.split())
-    fourth_traitement = third_traitement.upper()
-    return fourth_traitement
+    fourth_traitement = third_traitement.replace(',', ' ')
+    fifth_traitement = fourth_traitement.upper()
+    return fifth_traitement
 
 
 def clear_price(price):

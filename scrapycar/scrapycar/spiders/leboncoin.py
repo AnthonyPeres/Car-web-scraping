@@ -55,4 +55,5 @@ class LeboncoinSpider(scrapy.Spider):
         suiv = response.xpath('//a[@title="Page suivante"]/@href').extract_first()
         if suiv:
             next_page = self.url + suiv
+            sleep(60) # sleep 10 seconds
             yield scrapy.Request(url=next_page, callback=self.parse)
