@@ -7,10 +7,11 @@ import scrapy
 
 
 class AnnonceLeboncoinItem(scrapy.Item):
-    nom = scrapy.Field()
+    titre = scrapy.Field()
     # date = scrapy.Field()
     prix = scrapy.Field()
-    lieu = scrapy.Field()
+    ville = scrapy.Field()
+    departement = scrapy.Field()
     annee = scrapy.Field()
     kilometrage = scrapy.Field()
     carburant = scrapy.Field()

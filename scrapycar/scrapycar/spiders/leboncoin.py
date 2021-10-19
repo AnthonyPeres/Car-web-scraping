@@ -2,7 +2,9 @@ import scrapy
 from bs4 import BeautifulSoup
 import os
 from ..tools import clear_string, clear_price, clear_lieu
+from ..items import AnnonceLeboncoinItem
 
+# lancement : scrapy crawl leboncoin_spider -a recherche='Mercedes classe cla' -o annonces.csv
 
 class LeboncoinSpider(scrapy.Spider):
     def __init__(self, recherche='', **kwargs):
@@ -75,4 +77,17 @@ class LeboncoinSpider(scrapy.Spider):
                 aneee = int(annee)
                 km = int(km.split(' ')[0])
                 
-                print(f'{titre}: {prix}€, {annee}, {km}km, {carburant}, {boite}, a {ville} dans le {departement}')
+                annonce = AnnonceLeboncoinItem()
+                annonce['titre'] = titre
+                annonce['prix'] = prix
+                annonce['ville'] = ville
+                annonce['departement'] = departement
+                annonce['annee'] = annee
+                annonce['kilometrage'] = km
+                annonce['carburant'] = carburant
+                annonce['boite'] = boite
+                yield annonce
+                
+                
+                # print(f'{titre}: {prix}€, {annee}, {km}km, {carburant}, {boite}, a {ville} dans le {departement}')
+                
