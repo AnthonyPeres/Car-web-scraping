@@ -40,8 +40,16 @@ class LacentraleSpider(scrapy.Spider):
             km = unicodedata.normalize("NFKD", km)
             km = int(km.split('km')[0].replace(' ', ''))
             
-            print(f'{titre} :: {prix}€ :: annee {annee} :: {km}km :: {departement}')
+            annonce = AnnonceItem()
+            annonce['titre'] = titre
+            annonce['prix'] = prix
+            annonce['departement'] = departement
+            annonce['annee'] = annee
+            annonce['kilometrage'] = km
+            annonce['site'] = 'lacentrale'
+            yield annonce
             
+            # print(f'{titre} :: {prix}€ :: annee {annee} :: {km}km :: {departement}')
             
         # On parcourt la page suivante si il y en a une
         suiv = response.xpath('//a[@title="Page suivante"]/@href').extract_first()
