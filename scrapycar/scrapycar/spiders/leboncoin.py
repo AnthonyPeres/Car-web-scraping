@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from time import sleep
 
 from ..tools import clear_string, clear_price, clear_lieu
-from ..items import AnnonceLeboncoinItem
+from ..items import AnnonceItem
 
 # lancement : scrapy crawl leboncoin_spider -a recherche='Mercedes classe cla' -o annonces.csv
 
@@ -40,7 +40,7 @@ class LeboncoinSpider(scrapy.Spider):
             aneee = int(annee)
             km = int(km.split(' ')[0])
 
-            annonce = AnnonceLeboncoinItem()
+            annonce = AnnonceItem()
             annonce['titre'] = titre
             annonce['prix'] = prix
             annonce['ville'] = ville
@@ -49,11 +49,12 @@ class LeboncoinSpider(scrapy.Spider):
             annonce['kilometrage'] = km
             annonce['carburant'] = carburant
             annonce['boite'] = boite
+            annonce['site'] = 'leboncoin'
             yield annonce
 
         # On parcourt la page suivante si il y en a une
         suiv = response.xpath('//a[@title="Page suivante"]/@href').extract_first()
         if suiv:
             next_page = self.url + suiv
-            sleep(60) # sleep 10 seconds
+            sleep(60) # sleep 60 seconds
             yield scrapy.Request(url=next_page, callback=self.parse)

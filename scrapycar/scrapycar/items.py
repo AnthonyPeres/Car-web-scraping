@@ -6,7 +6,7 @@
 import scrapy
 
 
-class AnnonceLeboncoinItem(scrapy.Item):
+class AnnonceItem(scrapy.Item):
     titre = scrapy.Field()
     # date = scrapy.Field()
     prix = scrapy.Field()
@@ -16,4 +16,5 @@ class AnnonceLeboncoinItem(scrapy.Item):
     kilometrage = scrapy.Field()
     carburant = scrapy.Field()
     boite = scrapy.Field()
+    site = scrapy.Field()
     
